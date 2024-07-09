@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant 1 - Checkout</title>
+    <link rel="stylesheet" href="css/plaseazacomanda.css">
+</head>
+<body>
+    <div class="order-container">
+        <div class="container">
+            <h1>Plasează Comanda</h1>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="first-name">Prenume:</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Nume:</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Număr de Telefon:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Adresă de Livrare:</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Plasează Comanda</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="order-summary">
+        <h2>Sumar Comandă</h2>
+        <div class="cart-items"></div>
+        <div class="cart-total">Total: <span id="cart-total-price">0</span> lei</div>
+    </div>
+    <div class="thank-you-message" style="display: none;">
+        <h2>Mulțumim pentru comanda dumneavoastră!</h2>
+        <p>Comanda dumneavoastră a fost plasată cu succes. Vă mulțumim că ați ales restaurantul nostru și vă așteptăm cu drag să reveniți!</p>
+    </div>
+    
+
+    <script src="javascript/plaseazacomanda.js"></script>
+    <script>
+        // Recuperăm produsele din coș din localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Funcție pentru afișarea conținutului coșului
+        function displayCartItems() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            let totalPrice = 0;
+
+            cartItems.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.textContent = `${item.name} - ${item.price.toFixed(2)} lei`;
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Elimină';
+                removeButton.addEventListener('click', () => {
+                    removeFromCart(index);
+                });
+
+                cartItem.appendChild(removeButton);
+                cartItemsContainer.appendChild(cartItem);
+
+                totalPrice += item.price;
+            });
+
+            document.getElementById('cart-total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        // Funcție pentru eliminarea unui produs din coș
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            displayCartItems();
+        }
+
+        // Afișăm conținutul coșului la încărcarea paginii
+        displayCartItems();
+
+
+
+
+        
+
+
+        const orderForm = document.getElementById('order-form');
+    const orderSummary = document.querySelector('.order-summary');
+    const thankYouMessage = document.querySelector('.thank-you-message');
+
+    orderForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne trimiterea formularului
+
+        // Cod existent pentru preluarea datelor din formular
+        // ...
+
+        // Procesarea comenzii
+        // ...
+
+        // Golim coșul de cumpărături după plasarea comenzii
+        localStorage.removeItem('cartItems');
+        localStorage.removeItem('cart');
+
+        // Ascundem formularul de plasare a comenzii și sumarul comenzii
+        document.querySelector('.order-container').style.display = 'none';
+        orderSummary.style.display = 'none';
+
+        // Afișăm mesajul de mulțumire
+        thankYouMessage.style.display = 'block';
+
+        // Afișăm secțiunea principală a site-ului și containerul coșului de cumpărături
+        document.querySelector('.main-section').style.display = 'block';
+        document.querySelector('.cart-container').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'none';
+    });
+    </script>
+</body>
+</html>

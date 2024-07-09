@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfață Livratori</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Logo</a>
+            </div>
+            <div class="user-info">
+                <span class="user-name">Nume Livrator</span>
+                <img src="profile-picture.jpg" alt="Fotografie Profil" class="profile-picture">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="orders">
+            <h2>Comenzi de Livrat</h2>
+            <ul class="order-list">
+                <li class="order-item">
+                    <div class="order-details">
+                        <h3>Comandă #123</h3>
+                        <p>Restaurant: Numele Restaurantului</p>
+                        <p>Adresa: Strada Principală, Nr. 123</p>
+                    </div>
+                    <div class="order-actions">
+                        <button class="accept-btn">Acceptă</button>
+                        <button class="decline-btn">Refuză</button>
+                    </div>
+                </li>
+                <!-- Alte comenzi de livrat -->
+            </ul>
+        </section>
+
+        <section class="active-order">
+            <h2>Comandă Activă</h2>
+            <div class="order-details">
+                <h3>Comandă #456</h3>
+                <p>Restaurant: Numele Restaurantului</p>
+                <p>Adresa: Strada Secundară, Nr. 456</p>
+                <p>Detalii Comandă: ...</p>
+            </div>
+            <div class="order-actions">
+                <button class="complete-btn">Marchează ca Livrată</button>
+            </div>
+            <div class="map-container">
+                <h3>Hartă</h3>
+                <div id="map"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+</body>
+</html>
